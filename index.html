@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cent - تجربة موسيقية غير مسبوقة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%); 
+            color: #F8FAFC; 
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Glassmorphism */
+        .glass { 
+            background: rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            border-radius: 20px; 
+            box-shadow: 0 25px 45px rgba(0,0,0,0.3);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><radialGradient id="g" cx="50%" cy="50%"><stop offset="0%" stop-color="%238B5CF6" stop-opacity="0.1"/><stop offset="100%" stop-color="%23EC4899" stop-opacity="0.05"/></radialGradient></defs><rect width="100" height="100" fill="url(%23g)"/><circle cx="20" cy="20" r="2" fill="%233B82F6" opacity="0.6"><animate attributeName="cy" values="20;80;20" dur="3s" repeatCount="indefinite"/></circle><circle cx="80" cy="80" r="1.5" fill="%23EC4899" opacity="0.5"><animate attributeName="cy" values="80;20;80" dur="4s" repeatCount="indefinite"/></circle></svg>');
+            animation: wave 20s linear infinite;
+            z-index: 1;
+        }
+        @keyframes wave {
+            0% { transform: translateX(-100%) translateZ(0) scaleY(1); }
+            50% { transform: translateX(0) translateZ(0) scaleY(0.55); }
+            100% { transform: translateX(100%) translateZ(0) scaleY(1); }
+        }
+        
+        .hero-content { position: relative; z-index: 2; }
+        .hero h1 { 
+            font-size: clamp(3rem, 8vw, 6rem); 
+            background: linear-gradient(135deg, #8B5CF6, #EC4899, #3B82F6); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            margin-bottom: 1rem; 
+            animation: fadeInUp 1s ease;
+        }
+        .hero .subtitle { 
+            font-size: 1.5rem; 
+            opacity: 0.9; 
+            margin-bottom: 3rem; 
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+        .app-mockup { 
+            width: 300px; height: 600px; 
+            background: linear-gradient(145deg, #1E293B, #0F172A); 
+            border-radius: 40px; 
+            position: relative; 
+            margin: 2rem auto; 
+            box-shadow: 0 50px 100px rgba(139, 92, 246, 0.3); 
+            animation: float 6s ease-in-out infinite;
+        }
+        .app-mockup::before { 
+            content: ''; 
+            position: absolute; 
+            top: -10px; left: 50%; 
+            transform: translateX(-50%); 
+            width: 120px; height: 120px; 
+            background: radial-gradient(circle, #8B5CF6 0%, transparent 70%); 
+            border-radius: 50%; 
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes float { 0%,100%{transform:translateY(0px);} 50%{transform:translateY(-20px);} }
+        @keyframes glow { 0%{opacity:0.6; transform:scale(1);} 100%{opacity:1; transform:scale(1.1);} }
+        
+        .cta-btn {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, #8B5CF6, #EC4899);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.4);
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+        .cta-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 30px 60px rgba(139, 92, 246, 0.6);
+        }
+        
+        /* Features */
+        .features { padding: 100px 5%; max-width: 1200px; margin: 0 auto; }
+        .features h2 { 
+            text-align: center; 
+            font-size: 3rem; 
+            margin-bottom: 4rem; 
+            background: linear-gradient(135deg, #8B5CF6, #EC4899); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent;
+        }
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;
+        }
+        .feature-card {
+            glass; padding: 2.5rem; text-align: center; transition: transform 0.3s ease;
+            opacity: 0; transform: translateY(50px);
+        }
+        .feature-card:hover { transform: translateY(-10px); }
+        .feature-icon { 
+            width: 80px; height: 80px; 
+            background: linear-gradient(135deg, #8B5CF6, #3B82F6); 
+            border-radius: 20px; 
+            display: flex; align-items: center; justify-content: center; 
+            font-size: 2rem; margin: 0 auto 1rem; 
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+        }
+        
+        /* Stats */
+        .stats {
+            padding: 100px 5%;
+            background: rgba(15, 23, 42, 0.8);
+            text-align: center;
+        }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
+        .stat { font-size: 3rem; font-weight: 800; color: #EC4899; margin-bottom: 0.5rem; }
+        .stat-label { font-size: 1.1rem; opacity: 0.8; }
+        
+        /* Gallery */
+        .gallery { padding: 100px 5%; max-width: 1200px; margin: 0 auto; }
+        .carousel {
+            display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 2rem; padding: 2rem 0;
+            scrollbar-width: none; -ms-overflow-style: none;
+        }
+        .carousel::-webkit-scrollbar { display: none; }
+        .carousel-item {
+            flex: 0 0 300px; scroll-snap-align: center;
+            glass; padding: 2rem; text-align: center;
+            transform: perspective(1000px) rotateY(10deg);
+            transition: transform 0.5s ease;
+        }
+        .carousel-item:hover { transform: perspective(1000px) rotateY(0deg) scale(1.05); }
+        .screenshot { 
+            width: 100%; height: 400px; 
+            background: linear-gradient(145deg, #1E293B, #334155); 
+            border-radius: 20px; 
+            margin-bottom: 1rem;
+        }
+        
+        /* Download */
+        .download {
+            padding: 100px 5%;
+            text-align: center;
+            background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+            clip-path: polygon(0 10%, 100% 0, 100% 90%, 0 100%);
+            margin: 100px 0;
+        }
+        .download h2 { font-size: 3.5rem; margin-bottom: 2rem; }
+        .download-btn {
+            display: inline-block; padding: 1.5rem 4rem;
+            background: rgba(255,255,255,0.2); backdrop-filter: blur(20px);
+            color: white; text-decoration: none; border-radius: 50px;
+            font-size: 1.3rem; font-weight: 700;
+            border: 2px solid rgba(255,255,255,0.3);
+            animation: pulse 2s infinite;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(255,255,255,0.7);} 70%{box-shadow:0 0 0 20px transparent;} 100%{box-shadow:0 0 0 0 transparent;} }
+        
+        /* Footer */
+        .footer {
+            padding: 3rem 5%; background: #0F172A;
+            text-align: center;
+        }
+        .social-icons { 
+            display: flex; justify-content: center; gap: 1.5rem; margin: 2rem 0;
+        }
+        .social-icons a { 
+            width: 50px; height: 50px; 
+            background: linear-gradient(135deg, #8B5CF6, #EC4899); 
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: white; text-decoration: none; transition: transform 0.3s ease;
+        }
+        .social-icons a:hover { transform: scale(1.2) rotate(360deg); }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeInUp 1s ease forwards; opacity: 0; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .features, .gallery, .stats { padding: 50px 5%; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Experience Music Like Never Before</h1>
+            <p class="subtitle">Cent - Your Personal Music Universe</p>
+            <div class="app-mockup"></div>
+            <a href="#download" class="cta-btn">ابدأ الآن مجاناً</a>
+        </div>
+    </section>
+    
+    <!-- Features -->
+    <section class="features">
+        <h2 class="fade-in">مميزات Cent المتقدمة</h2>
+        <div class="features-grid">
+            <div class="feature-card fade-in"><div class="feature-icon"><i class="fas fa-infinity"></i></div><h3>بث غير محدود</h3><p>استمتع بملايين الأغاني بدون قيود أو توقف</p></div>
+            <div class="feature-card fade-in"><div class="feature-icon"><i class="fas fa-music"></i></div><h3>جودة صوت عالية</h3><p>صوت نقي بمعدل 320kbps لتجربة سمعية مثالية</p></div>
+            <div class="feature-card fade-in"><div class="feature-icon"><i class="fas fa-brain"></i></div><h3>قوائم ذكية</h3><p>الذكاء الاصطناعي يصنع قوائم موسيقية مثالية لك</p></div>
+            <div class="feature-card fade-in"><div class="feature-icon"><i class="fas fa-download"></i></div><h3>وضع عدم الاتصال</h3><p>حمل أغانيك واستمع في أي مكان بدون إنترنت</p></div>
+            <div class="feature-card fade-in"><div class="feature-icon"><i class="fas fa-mobile-alt"></i></div><h3>متعدد المنصات</h3><p>متوفر على Android, iOS, Web, وSmart TV</p></div>
+        </div>
+    </section>
+    
+    <!-- Stats -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div><div class="stat" data-target="10">0</div><div class="stat-label">مليون+ تحميل</div></div>
+            <div><div class="stat" data-target="50">0</div><div class="stat-label">مليون+ أغنية</div></div>
+            <div><div class="stat" data-target="4.8">0</div><div class="stat-label">تقييم ★</div></div>
+        </div>
+    </section>
+    
+    <!-- Gallery -->
+    <section class="gallery">
+        <h2 class="fade-in">اكتشف Cent</h2>
+        <div class="carousel">
+            <div class="carousel-item fade-in">
+                <div class="screenshot"></div>
+                <h4>مشغل موسيقى تفاعلي</h4>
+            </div>
+            <div class="carousel-item fade-in">
+                <div class="screenshot"></div>
+                <h4>قوائم تشغيل مخصصة</h4>
+            </div>
+            <div class="carousel-item fade-in">
+                <div class="screenshot"></div>
+                <h4>بحث ذكي</h4>
+            </div>
+            <div class="carousel-item fade-in">
+                <div class="screenshot"></div>
+                <h4>ملف شخصي</h4>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Download -->
+    <section id="download" class="download">
+        <h2>حمل Cent الآن</h2>
+        <p style="font-size: 1.3rem; margin-bottom: 2rem;">متوفر لـ Android</p>
+        <a href="#" class="download-btn" download><i class="fas fa-download"></i> تحميل APK مجاناً</a>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <h3>Cent</h3>
+        <p>© 2026 Cent Music. جميع الحقوق محفوظة.</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-spotify"></i></a>
+        </div>
+        <p><a href="#" style="color: #8B5CF6;">سياسة الخصوصية</a> | <a href="#" style="color: #8B5CF6;">شروط الاستخدام</a></p>
+    </footer>
+
+    <script>
+        // Scroll Animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.stat');
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText.replace(/[^0-9.]/g, '');
+                const increment = target / 200;
+                if (count < target) {
+                    counter.innerText = (count + increment).toFixed(count < 10 ? 1 : 0);
+                    requestAnimationFrame(animateCounters);
+                } else {
+                    counter.innerText = target + (target === 4.8 ? '★' : 'M+');
+                }
+            });
+        };
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        });
+        document.querySelector('.stats').scrollIntoView = statsObserver.observe;
+
+        // Carousel Auto-scroll
+        let scrollPos = 0;
+        setInterval(() => {
+            const carousel = document.querySelector('.carousel');
+            scrollPos += 320;
+            if (scrollPos > carousel.scrollWidth) scrollPos = 0;
+            carousel.scrollTo({ left: scrollPos, behavior: 'smooth' });
+        }, 4000);
+    </script>
+</body>
+</html>
+          
