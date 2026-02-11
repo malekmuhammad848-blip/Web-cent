@@ -275,18 +275,108 @@
         <a href="#" class="download-btn" download><i class="fas fa-download"></i> تحميل APK مجاناً</a>
     </section>
     
-    <!-- Footer -->
-    <footer class="footer">
-        <h3>Cent</h3>
-        <p>© 2026 Cent Music. جميع الحقوق محفوظة.</p>
+<!-- Footer المحسن فقط - استبدل قسم Footer الحالي بهذا -->
+<footer class="footer">
+    <div class="footer-content">
+        <h3><i class="fas fa-music"></i> Cent Music</h3>
+        <p>© 2026 Cent - تجربة موسيقية استثنائية</p>
+        
+        <!-- Social Media محسّن مع الحسابات الحقيقية -->
         <div class="social-icons">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-            <a href="#"><i class="fab fa-spotify"></i></a>
+            <a href="https://instagram.com/cx0hl" target="_blank" title="@cx0hl" rel="noopener">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://vk.com/vkz7t" target="_blank" title="@vkz7t" rel="noopener">
+                <i class="fab fa-vk"></i>
+            </a>
+            <a href="https://twitter.com/cx0hl" target="_blank" title="@cx0hl">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://youtube.com/@cx0hl" target="_blank" title="@cx0hl">
+                <i class="fab fa-youtube"></i>
+            </a>
         </div>
-        <p><a href="#" style="color: #8B5CF6;">سياسة الخصوصية</a> | <a href="#" style="color: #8B5CF6;">شروط الاستخدام</a></p>
-    </footer>
+        
+        <div class="footer-links">
+            <a href="#">الخصوصية</a> | 
+            <a href="#">الشروط</a> | 
+            <a href="#">اتصل بنا</a>
+        </div>
+    </div>
+</footer>
+
+<!-- استبدل أيضاً CSS الخاص بالـ Footer بهذا (أضفه قبل </style>) -->
+<style>
+.footer {
+    padding: 4rem 5% 2rem;
+    background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+    position: relative;
+    overflow: hidden;
+}
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #8B5CF6, #EC4899, #3B82F6, transparent);
+    animation: shimmer 3s infinite;
+}
+@keyframes shimmer {
+    0%, 100% { opacity: 0.4; transform: scaleX(0); }
+    50% { opacity: 1; transform: scaleX(1); }
+}
+.footer-content {
+    max-width: 1200px; margin: 0 auto; text-align: center;
+}
+.footer h3 {
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, #8B5CF6, #EC4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+    animation: glowText 2s ease-in-out infinite alternate;
+}
+@keyframes glowText {
+    from { filter: drop-shadow(0 0 5px #8B5CF6); }
+    to { filter: drop-shadow(0 0 20px #EC4899); }
+}
+.social-icons {
+    display: flex; justify-content: center; gap: 2rem; margin: 2.5rem 0;
+    flex-wrap: wrap;
+}
+.social-icons a {
+    width: 65px; height: 65px;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(236, 72, 153, 0.9));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 1.5rem;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative; overflow: hidden;
+    box-shadow: 0 15px 35px rgba(139, 92, 246, 0.4);
+}
+.social-icons a::before {
+    content: '';
+    position: absolute; top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+}
+.social-icons a:hover::before { left: 100%; }
+.social-icons a:hover {
+    transform: translateY(-10px) scale(1.1) rotate(360deg);
+    box-shadow: 0 25px 50px rgba(139, 92, 246, 0.7);
+}
+.footer-links {
+    margin-top: 2rem;
+}
+.footer-links a {
+    color: #8B5CF6; margin: 0 1rem; text-decoration: none;
+    font-weight: 500; transition: all 0.3s ease;
+}
+.footer-links a:hover { color: #EC4899; text-shadow: 0 0 10px rgba(236, 72, 153, 0.5); }
+</style>
+
 
     <script>
         // Scroll Animations
